@@ -1,0 +1,30 @@
+{
+  "name": "theoffice-api",
+  "version": "1.0.0",
+  "description": "a REST api to retrieve the Office (US) quotes when needed (i.e. ALWAYS)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anGie44/theOffice-api.git"
+  },
+  "keywords": [
+    "theOffice",
+    "api",
+    "quotes",
+    "LOL"
+  ],
+  "author": "anGie44",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anGie44/theOffice-api/issues"
+  },
+  "homepage": "https://github.com/anGie44/theOffice-api#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.4",
+    "request-promise": "^4.2.1"
+  }
+}
