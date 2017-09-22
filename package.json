@@ -24,6 +24,8 @@
   "homepage": "https://github.com/anGie44/theOffice-api#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "cors": "^2.8.4",
+    "d3": "^4.10.2",
     "express": "^4.15.4",
     "request-promise": "^4.2.1"
   }

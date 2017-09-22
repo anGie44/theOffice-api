@@ -1,38 +1,53 @@
+var cors = require('cors')
 var express = require('express')
-var app = express();
-var request = require('request')
+var fs = require('fs')
+var https = require('https')
+var rp = require('request-promise')
 var office_quote_extractor = require('./models/quotesParser.js')
 
+var app = express();
 var port = process.env.POR || 8080;
-var router = express.Router();
 var domain = 'http://officequotes.net/';
+var router = express.Router(); 
+router.use(cors())
+
+https.createServer({
+        key: fs.readFileSync('key.pem'),
+        cert: fs.readFileSync('cert.pem')
+}, app).listen(port);
 
 router.get('/', function(req, res) {
         res.json({ message: 'welcome to the Office api!' });
 })
 
-router.get('/season/:season', function(req, res) {
-        var seasonKey = 's' + req.params['season'];
-        var episodeKey = 'ALL';
+router.get('/season/:season/format/:format', function(req, res, next) {
+        var seasonKey = 's' + req.params.season;
         var q_data = [];
 
-        request(domain, function(err, resp, html) {
-            if (!err && resp.statusCode == 200) {       
-                var urls = office_quote_extractor.episodes(html, req.params['season']);
-                for (i in urls) {
-                        request(domain + urls[i], function(error, response, html) {
-                                if (!error && response.statusCode == 200){
-                                        q_data.push(office_quote_extractor.quotes(html));
-                                }
-                                if (q_data.length == urls.length) {
-                                        quote_data = { "season" : seasonKey, "episode" : q_data.reduce(function(acc, cur, i) { acc['e'+(i+1)] = cur; return acc;}, {}) };
-                                        res.json({data: quote_data});
-                                }
+        rp(domain)
+            .then(function(htmlString) {
+                    var urls = office_quote_extractor.episodes(htmlString, req.params.season);
+                    for (i in urls) {
+                        rp(domain + urls[i])
+                            .then(function(htmlString) {
+                                    q_data.push(office_quote_extractor.quotes(htmlString));
+                                    if (q_data.length == urls.length) {
+                                            quote_data = { "season" : seasonKey, "episode" : q_data.reduce(function (acc, curr) { acc[curr[1]] = {"name": curr[2], "quotes": curr[0]} ; return acc; }, {} )};
+                                            if (req.params.format == "quotes") {
+                                                res.json({data: quote_data});
+                                            }
+                                            else if (req.params.format == "connections") {
+                                                res.locals = {data: quote_data};
+                                                next()
+                                            }
+                                    }
 
                         })
                }
-            }
-        })
+            })
+        
+}, function(req, res, next) {
+    res.json({data: office_quote_extractor.links_and_nodes(res.locals)})
 })
 
 
@@ -56,8 +71,6 @@ router.get('/search/season/:season/:key', function(req, res) {
 })
 
 app.use('/', router);
-
-app.listen(port);
 console.log('Magic happens on port ' + port);
 
 
