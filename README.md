@@ -12,8 +12,8 @@ Currently hosted at: https://the-office-api.herokuapp.com
 
 * Get quotes or nodes/links by season number 
     * **URL**       :   /season/:season/format/:format
-    * Method    :   GET
-    * Request   : 
+    * **Method**    :   GET
+    * **Request**   : 
                 { body:
                 {
                 season: int // season number [1-9],
@@ -21,9 +21,9 @@ Currently hosted at: https://the-office-api.herokuapp.com
                 }
                 }
 * Get quotes for a specific season and episode
-    * URL       :   /season/:season/episode/:episode
-    * Method    :   GET
-    * Request   : 
+    * **URL**       :   /season/:season/episode/:episode
+    * **Method**    :   GET
+    * **Request**   : 
                 { body:
                 {
                 season: int // season number [1-9],
