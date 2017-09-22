@@ -13,7 +13,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
 * Get quotes or nodes/links by season number 
     * **URL:**           _/season/:season/format/:format_
     * **Method:**       `GET`
-    * **URL Params**
+    * **URL Params:**
     
          **Required:**
          
@@ -21,14 +21,22 @@ Currently hosted at: https://the-office-api.herokuapp.com
          
          `format=[string] // "quotes" or "connections"`
 
+   * **Success Response:**
+   * **Code:** 200 <br />
+     **Content:** JSON
+   
 * Get quotes for a specific season and episode
     * **URL:**          _/season/:season/episode/:episode_
     * **Method:**       `GET`
-    * **URL Params**
+    * **URL Params:**
     
          **Required:** 
          
          `season=[integer] // season number [1-9], inclusive`
          
          `episode=[integer] // episode number within season (indexing begins at 1)`
+    * **Success Response:**
+    * **Code:** 200 <br />
+      **Content:** JSON
+    
                 
