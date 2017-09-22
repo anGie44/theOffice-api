@@ -39,6 +39,6 @@ Currently hosted at: https://the-office-api.herokuapp.com
          `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
      * **Code:** 200 <br />
-       **Content:** JSON
+       **Content:** { "data" : { "season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
     
                 
