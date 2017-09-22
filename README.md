@@ -1,5 +1,5 @@
 # theOffice-api
-a REST api to retrieve the Office quotes when needed (ALWAYS...obvio 💁‍)
+a REST api to retrieve the Office quotes when needed (ALWAYS 💁‍)
 
 Currently hosted at: https://the-office-api.herokuapp.com
 
