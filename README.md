@@ -28,7 +28,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
     
          **Required:** 
          
-         `season: int // season number [1-9], inclusive`
+         `season=[integer] // season number [1-9], inclusive`
          
-         `episode: int // episode number within season (indexing begins at 1)`
+         `episode=[integer] // episode number within season (indexing begins at 1)`
                 
