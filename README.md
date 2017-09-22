@@ -21,9 +21,11 @@ Currently hosted at: https://the-office-api.herokuapp.com
          
          `format=[string] // "quotes" or "connections"`
 
-   * **Success Response:**
-         * **Code:** 200 <br />
-           **Content[Quotes]:** {"data" : {"season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
+     * **Success Response:**
+      * **Code:** 200 <br />
+        **Content[Quotes]:** { "data" : { "season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
+        **Content[Connections]:** { "data" : [{ "episode": "_episodeNumber_", "links" : [{ "source" : "_characterName_", "target": "_characterName_", "value" : "_numberOfCoOccurencesInEpisode_" }], "nodes" : [{ "id" : "_characterName_" }]}
+        
    
 * Get quotes for a specific season and episode
     * **URL:**          _/season/:season/episode/:episode_
