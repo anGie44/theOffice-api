@@ -11,21 +11,20 @@ Currently hosted at: https://the-office-api.herokuapp.com
 ## GET 
 
 * Get quotes or nodes/links by season number 
-    * **URL:**          _/season/:season/format/:format_
-    * **Method:**       `GET`
+    * **URL:**       :    _/season/:season/format/:format_
+    * **Method:**    :   `GET`
     * **URL Params**
     
          **Required:**
                 `season=[integer] // season number [1-9], inclusive`
-                
                 `format=[string] // if interested in receiving dialogue, use: "quotes"; if interested in receiving co-occurence links and node information, use: "connections"`
 
 * Get quotes for a specific season and episode
-    * **URL**       :   _/season/:season/episode/:episode_
-    * **Method**    :   `GET`
-    * **URL Params**   : 
-                { body:
-                {
-                season: int // season number [1-9],
-                episode: int // episode number within season (indexing begins at 1)
-                }
+    * **URL:**       :   _/season/:season/episode/:episode_
+    * **Method:**    :   `GET`
+    * **URL Params**
+    
+         **Required:**
+                `season: int // season number [1-9], inclusive`
+                `episode: int // episode number within season (indexing begins at 1)`
+                
