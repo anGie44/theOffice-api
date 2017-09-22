@@ -23,7 +23,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
 
    * **Success Response:**
          * **Code:** 200 <br />
-           **Content:** {"data":{"season": _seasonNumber_ , "episode": { "_episodeNumber_" { "name" : "_episodeName_", "quotes": [[]] }
+           **Content:** {"data" : {"season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
    
 * Get quotes for a specific season and episode
     * **URL:**          _/season/:season/episode/:episode_
