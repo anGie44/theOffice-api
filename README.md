@@ -11,7 +11,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
 ## GET 
 
 * Get quotes or nodes/links by season number 
-    * URL       :   /season/:season/format/:format
+    * **URL**       :   /season/:season/format/:format
     * Method    :   GET
     * Request   : 
                 { body:
