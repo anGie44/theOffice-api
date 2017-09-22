@@ -23,7 +23,9 @@ Currently hosted at: https://the-office-api.herokuapp.com
 
      * **Success Response:**
       * **Code:** 200 <br />
+      
         **Content[Quotes]:** { "data" : { "season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
+        
         **Content[Connections]:** { "data" : [{ "episode": "_episodeNumber_", "links" : [{ "source" : "_characterName_", "target": "_characterName_", "value" : "_numberOfCoOccurencesInEpisode_" }], "nodes" : [{ "id" : "_characterName_" }]}
         
    
@@ -39,6 +41,6 @@ Currently hosted at: https://the-office-api.herokuapp.com
          `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
      * **Code:** 200 <br />
-       **Content:** { "data" : { "season": _seasonNumber_ , "episode" : { "_episodeNumber_" : { "name" : "_episodeName_", "quotes" : [[]] }
+       **Content:** { "data" : { "season": _seasonNumber_ , "episode" : "_episodeNumber_", "quotes" : [[[]]] }
     
                 
