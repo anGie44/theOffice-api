@@ -22,8 +22,8 @@ Currently hosted at: https://the-office-api.herokuapp.com
          `format=[string] // "quotes" or "connections"`
 
    * **Success Response:**
-   * **Code:** 200 <br />
-     **Content:** JSON
+    * **Code:** 200 <br />
+      **Content:** JSON
    
 * Get quotes for a specific season and episode
     * **URL:**          _/season/:season/episode/:episode_
@@ -36,7 +36,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
          
          `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
-          * **Code:** 200 <br />
-            **Content:** JSON
+     * **Code:** 200 <br />
+       **Content:** JSON
     
                 
