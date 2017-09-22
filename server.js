@@ -71,6 +71,6 @@ router.get('/search/season/:season/:key', function(req, res) {
 })
 
 app.use('/', router);
-console.log('Magic happens on port ' + port);
+console.log('Running app');
 
 
