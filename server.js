@@ -54,18 +54,16 @@ router.get('/season/:season/format/:format', function(req, res, next) {
 
 
 router.get('/season/:season/episode/:episode', function(req, res) {
-        var episode = parseInt(req.params['episode']);
-        var seasonKey = 's' + req.params['season'];
-        var episodeKey = 'e' + req.params['episode'];
+        var episode = parseInt(req.params.episode);
+        var seasonKey = 's' + req.params.season;
+        var episodeKey = 'e' + req.params.episode;
         if (parseInt(episode) < 10) episode = '0' + episode;
-        var quotePage = 'no' + req.params['season'] + '-' + episode + '.php';
-        request(domain + quotePage, function(error, response, html) {
-            if (!error && response.statusCode == 200){
+        var quotePage = 'no' + req.params.season + '-' + episode + '.php';
+        rp(domain + quotePage)
+            .then(function(htmlString) {
                 quote_data = { "season" : seasonKey, "episode" : episodeKey, "quotes": office_quote_extractor.quotes(html) };        
                 res.json({data: quote_data});
-
-            }
-        })
+            })
 })
 
 router.get('/search/season/:season/:key', function(req, res) {
