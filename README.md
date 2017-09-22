@@ -14,7 +14,7 @@ Currently hosted at: https://the-office-api.herokuapp.com
     * **URL**       :   _/season/:season/format/:format_
     * **Method**    :   `GET`
     * **URL Params**   : 
-      **Required:**
+    **Required:**
                 `season=[integer]` // season number [1-9], inclusive
                 `format=[string]` // if interested in receiving dialogue, use: "quotes"; if interested in receiving co-occurence links and node information, use: "connections"
                 }
