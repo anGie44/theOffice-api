@@ -6,16 +6,16 @@ var rp = require('request-promise')
 var office_quote_extractor = require('./models/quotesParser.js')
 
 var app = express();
-var port = process.env.POR || 8080;
+//var port = process.env.POR || 8080;
 var domain = 'http://officequotes.net/';
 var router = express.Router(); 
 router.use(cors())
 
-https.createServer({
+/*https.createServer({
         key: fs.readFileSync('key.pem'),
         cert: fs.readFileSync('cert.pem')
 }, app).listen(port);
-
+*/
 router.get('/', function(req, res) {
         res.json({ message: 'welcome to the Office api!' });
 })
