@@ -20,4 +20,12 @@ Currently hosted at: https://the-office-api.herokuapp.com
                 format: string // format can be either "quotes" or "connections"
                 }
                 }
-                
+* Get quotes for a specific season and episode
+    * URL       :   /season/:season/episode/:episode
+    * Method    :   GET
+    * Request   : 
+                { body:
+                {
+                season: int // season number [1-9],
+                episode: int // episode number within season (indexing begins at 1)
+                }
