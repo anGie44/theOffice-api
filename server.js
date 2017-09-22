@@ -11,11 +11,16 @@ var domain = 'http://officequotes.net/';
 var router = express.Router(); 
 router.use(cors())
 
-/*https.createServer({
+/* Uncomment https-server code to run locally */
+
+/*
+https.createServer({
         key: fs.readFileSync('key.pem'),
         cert: fs.readFileSync('cert.pem')
 }, app).listen(port);
+
 */
+
 app.listen(port);
 
 router.get('/', function(req, res) {
@@ -71,6 +76,6 @@ router.get('/search/season/:season/:key', function(req, res) {
 })
 
 app.use('/', router);
-console.log('Running app');
+console.log('Magic happens on port ' + port);
 
 
