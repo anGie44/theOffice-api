@@ -19,6 +19,7 @@ Set.prototype.union = function(setB) {
 
 ////////// Modules //////////////////
 
+/* Return all quotes for a given episode */
 const quotes = function(html) { 
     var parsedHTML = $.load(html)
 
@@ -44,7 +45,7 @@ const quotes = function(html) {
         }
 
     })
-    return [scenes, episode_num, episode_name];
+    return {"episode_num" : episode_num, "name": episode_name, "quotes" : scenes};
 }
 
 const episodes = function(html, season) {

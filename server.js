@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
 
 router.get('/season/:season/format/:format', function(req, res, next) {
         var seasonKey = 's' + req.params.season;
-        var q_data = [];
+        var quote_data = [];
 
         rp(domain)
             .then(function(htmlString) {
@@ -37,9 +37,9 @@ router.get('/season/:season/format/:format', function(req, res, next) {
                     for (i in urls) {
                         rp(domain + urls[i])
                             .then(function(htmlString) {
-                                    q_data.push(office_quote_extractor.quotes(htmlString));
-                                    if (q_data.length == urls.length) {
-                                            quote_data = { "season" : seasonKey, "episode" : q_data.reduce(function (acc, curr) { acc[curr[1]] = {"name": curr[2], "quotes": curr[0]} ; return acc; }, {} )};
+                                    quote_data.push(office_quote_extractor.quotes(htmlString));
+                                    if (quote_data.length == urls.length) {
+                                            // quote_data = {"episode" : q_data.reduce(function (acc, curr) { acc[curr[1]] = {"name": curr[2], "quotes": curr[0]} ; return acc; }, {} )};
                                             if (req.params.format == "quotes") {
                                                 res.json({data: quote_data});
                                             }
