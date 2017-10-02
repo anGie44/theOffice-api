@@ -64,8 +64,9 @@ router.get('/season/:season/episode/:episode', function(req, res) {
         var quotePage = 'no' + req.params.season + '-' + episode + '.php';
         rp(domain + quotePage)
             .then(function(htmlString) {
-                var quote_data = {...{"season" : req.params.season}, ...office_quote_extractor.quotes(htmlString)};    
-                res.json({data: quote_data});
+                var quote_data = office_quote_extractor.quotes(htmlString);   
+
+                res.json({data: {...{"season" : req.params.season}, ...quote_data}});
             })
 })
 
