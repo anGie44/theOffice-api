@@ -63,7 +63,7 @@ const links_and_nodes = function(season_data) {
    var result = []
     season_data.data.forEach(item => {
         [links, nodes] = generateNodesAndLinks(item.quotes)
-        result.push({"episode": item.episode, "links": links, "nodes": nodes})
+        result.push({"episode": item.episode, "name": item.name, "links": links, "nodes": nodes})
     })
     return result.sort((a,b) => a.episode - b.episode);
 }
