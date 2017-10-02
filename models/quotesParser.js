@@ -65,7 +65,7 @@ const links_and_nodes = function(season_data) {
         [links, nodes] = generateNodesAndLinks(item.quotes)
         result.push({"episode": item.episode, "links": links, "nodes": nodes})
     })
-    return result;
+    return result.sort((a,b) => parseInt(a.episode) - parseInt(b.episode));
 }
 
 
