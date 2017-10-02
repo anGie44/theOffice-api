@@ -45,7 +45,7 @@ const quotes = function(html) {
         }
 
     })
-    return {"episode_num" : episode_num, "name": episode_name, "quotes" : scenes};
+    return {"episode" : episode_num, "name": episode_name, "quotes" : scenes};
 }
 
 const episodes = function(html, season) {
