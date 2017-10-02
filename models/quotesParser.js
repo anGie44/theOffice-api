@@ -35,7 +35,7 @@ const quotes = function(html) {
         return parsedHTML(this).text().includes("Season") && parsedHTML(this).text().includes("Episode");  
     }).each(function(i, elm) {
         var textStr = parsedHTML(this).text().replace(/\n+\t+/g, ' ');
-        episode_num = textStr.match(/Episode (\d+)/)[1];
+        episode_num = parseInt(textStr.match(/Episode (\d+)/)[1]);
 
         if (/"/.test(textStr)) {
             episode_name = textStr.match( /"(.*?)"/ )[1];
