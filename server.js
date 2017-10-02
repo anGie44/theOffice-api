@@ -38,6 +38,7 @@ router.get('/season/:season/format/:format', function(req, res, next) {
                         rp(domain + urls[i])
                             .then(function(htmlString) {
                                     quote_data.push(office_quote_extractor.quotes(htmlString));
+                                    quote_data.sort((a,b) => parseInt(a.episode) - parseInt(b.episode))
                                     if (quote_data.length == urls.length) {
                                             // quote_data = {"episode" : q_data.reduce(function (acc, curr) { acc[curr[1]] = {"name": curr[2], "quotes": curr[0]} ; return acc; }, {} )};
                                             if (req.params.format == "quotes") {
