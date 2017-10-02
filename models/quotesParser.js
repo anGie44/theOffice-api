@@ -61,9 +61,9 @@ const episodes = function(html, season) {
 
 const links_and_nodes = function(season_data) {
    var result = []
-    Object.keys(season_data.data.episode).forEach(key => {
-        [links, nodes] = generateNodesAndLinks(season_data.data.episode[key].quotes)
-        result.push({"episode": key, "links": links, "nodes":nodes})
+    season_data.data.forEach(item => {
+        [links, nodes] = generateNodesAndLinks(item.quotes)
+        result.push({"episode": item.episode, "links": links, "nodes": nodes})
     })
     return result;
 }
