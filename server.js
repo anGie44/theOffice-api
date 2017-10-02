@@ -60,13 +60,12 @@ router.get('/season/:season/format/:format', function(req, res, next) {
 
 router.get('/season/:season/episode/:episode', function(req, res) {
         var episode = parseInt(req.params.episode);
-        var seasonKey = 's' + req.params.season;
-        var episodeKey = 'e' + req.params.episode;
         if (parseInt(episode) < 10) episode = '0' + episode;
         var quotePage = 'no' + req.params.season + '-' + episode + '.php';
         rp(domain + quotePage)
             .then(function(htmlString) {
-                quote_data = { "season" : seasonKey, "episode" : episodeKey, "quotes": office_quote_extractor.quotes(htmlString) };        
+                var quote_data = office_quote_extractor.quotes(htmlString);    
+                quote_data["season"] = req.params.season;  
                 res.json({data: quote_data});
             })
 })
