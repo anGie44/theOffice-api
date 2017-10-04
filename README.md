@@ -28,7 +28,7 @@ Currently used for: https://angie44.github.io/theOffice
       
         **Content [Quotes]:** { "data" : { "episode": _episodeNumber_, "name" : _episodeName_, "quotes" : [[]] }
         
-        **Content [Connections]:** { "data" : [{ "episode": _episodeNumber_, "name": _episodeName_, links" : [{ "source" : "_characterName_", "target": "_characterName_", "value" : "_numberOfCoOccurencesInEpisode_" }], "nodes" : [{ "id" : "_characterName_" }]}
+        **Content [Connections]:** { "data" : [{ "episode": _episodeNumber_, "name": _episodeName_, "links" : [{ "source" : _characterName_, "target": _characterName_, "value" : _numberOfCoOccurencesInEpisode_ }], "nodes" : [{ "id" : _characterName_ }]}
         
    
 * Get quotes for a specific season and episode
@@ -43,6 +43,6 @@ Currently used for: https://angie44.github.io/theOffice
          `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
      * **Code:** 200 <br />
-       **Content:** { "data" : { episode" : _episodeNumber_, "name": _episodeName_, "quotes" : [[]] }
+       **Content:** { "data" : { "episode" : _episodeNumber_, "name": _episodeName_, "quotes" : [[]] }
     
                 
