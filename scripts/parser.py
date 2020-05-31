@@ -72,3 +72,4 @@ if __name__ == "__main__":
             df = parse(r.content, encoding, i, int(episode))
             json_filename = 'season_{}_episode_{}.json'.format(i, episode)
             df.to_json(os.path.join(os.getcwd(), 'quotes', json_filename), orient='records', lines=True)
+            
