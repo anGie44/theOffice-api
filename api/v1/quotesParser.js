@@ -1,5 +1,7 @@
 var $  = require('cheerio')
 var d3 = require('d3')
+var fs = require('fs')
+var path = require('path')
 
 /////////// Helper Functions ////////////
 
@@ -21,14 +23,34 @@ Set.prototype.union = function(setB) {
 
 /* Return all quotes for a given episode */
 const quotes = function(html) { 
-    var parsedHTML = $.load(html)
+    htmlFile = path.join('raw_php', html)
+    var parsedHTML = $.load(fs.readFileSync(htmlFile)) 
 
     // get all div's w/ class: quote
     var scenes  = [], episode_num = '', episode_name = '';
     parsedHTML('div.quote').filter(function(i, elm) { 
         return !parsedHTML(this).children().first().text().includes('Deleted');
         }).each(function(i, elm) {
-                scenes[i] = parsedHTML(this).text().replace(/\t/g, '').split('\n').filter(quote => quote.length > 0);
+            text = ""
+            text_arr = []
+            parsedHTML(this).contents().each(function(i, elm) {
+                if (text == "") {
+                    if ($(this).get(0).tagName == "b") {
+                        text += $(this).text()
+                    }
+                } else {
+                    if ($(this).get(0).tagName == "b") {
+                        text_arr.push(text)
+                        text = $(this).text()
+                    } else {
+                        text += $(this).text().replace(/\t/g, '').trim()
+                    }
+                }
+            });
+            if (text_arr.length > 0) {
+                scenes.push(text_arr)
+            }
+                // scenes[i] = parsedHTML(this).text().replace(/\t/g, '').trim().split('\n').filter(quote => quote.length > 0);
     });
 
     parsedHTML('b').filter(function(i, elm) {
@@ -41,7 +63,7 @@ const quotes = function(html) {
             episode_name = textStr.match( /"(.*?)"/ )[1];
         }
         else { // episode_name not found w/in <b> tag
-            episode_name = parsedHTML(this).next().next().text().match(/"(.*?)"/)[1];
+            episode_name = parsedHTML(this).next().next().text()
         }
 
     })

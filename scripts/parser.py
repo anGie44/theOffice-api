@@ -46,12 +46,14 @@ def parse(content, encoding, season, episode):
             episodeList = [episode]*len(characterList)
             episodeNameList = [title]*len(characterList)
             sceneList = [i]*len(characterList)
+            lineList = list(range(1, len(characterList)+1))
             temp_df = pd.DataFrame(
                 {
                     'season': seasonList, 
                     'episode': episodeList, 
                     'episode_name': episodeNameList,
                     'scene': sceneList,
+                    'line': lineList,
                     'character': characterList,
                     'quote': quoteList
                 }
@@ -72,4 +74,3 @@ if __name__ == "__main__":
             df = parse(r.content, encoding, i, int(episode))
             json_filename = 'season_{}_episode_{}.json'.format(i, episode)
             df.to_json(os.path.join(os.getcwd(), 'quotes', json_filename), orient='records', lines=True)
-            

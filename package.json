@@ -23,12 +23,15 @@
   },
   "homepage": "https://github.com/anGie44/theOffice-api#readme",
   "dependencies": {
+    "assert": "^2.0.0",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.4",
     "d3": "^4.10.2",
+    "dotenv": "^8.2.0",
     "express": "^4.15.4",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
+    "mongodb": "^3.5.8",
     "request": "^2.82.0",
     "request-promise": "^4.2.1"
   }
