@@ -21,7 +21,7 @@ def parse(content, encoding, season, episode):
         if season == 1 and episode == 1:
             title = "Pilot"
     quotes = soup.find_all('div','quote')
-    df = pd.DataFrame(columns = ['season','episode','episode_name', 'scene', 'character','quote'])
+    df = pd.DataFrame(columns = ['season','episode','episode_name', 'scene', 'line', 'character','quote'])
     for i, quote_div in enumerate(quotes, start=1):
         characterList = []
         quoteList = []
