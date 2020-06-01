@@ -17,20 +17,31 @@ const mongoClient = function() {
 async function quotesByEpisode(season, episode) {
     const client = mongoClient();
     var quotes = [];
+    var name = "";
+
     try {
         await client.connect();
         const collection = client.db(config.dbName).collection(config.collectionName);
-        quotes = await collection.find({ season: Number(season), episode: Number(episode) }).sort({scene : 1, line: 1}).toArray();
-        
+        query = { season: Number(season), episode: Number(episode) }
+        fields = { _id: 0, character: 1, quote: 1 }
+        quotes = await collection.find(query)
+            .sort({scene : 1, line: 1})
+            .project(fields)
+            .toArray();
+        found = await collection.findOne(query);
+        if (found != null) {
+            name = found.episode_name;
+        }
+
     } catch (err) {
         console.log(err.stack);
     }
 
     client.close();
-    return {"quotes":quotes}
+
+    return {"episode_name" : name, "quotes" : quotes }
 
 }
-
 
 module.exports = {
     quotesByEpisode,
