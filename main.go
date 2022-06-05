@@ -23,9 +23,12 @@ var dbPassword = env.String("MONGODB_PASSWORD", false, "password", "mongodb data
 var dbCollection = env.String("MONGODB_COLLECTION", false, "quotes", "mongodb database collection")
 
 func main() {
-	bindAddress := fmt.Sprintf(":%s", os.Getenv("PORT")) // value provided by Heroku
-	if bindAddress == "" {
+	var bindAddress string
+	port := os.Getenv("PORT") // value provided by Heroku
+	if port == "" {
 		bindAddress = ":8080"
+	} else {
+		bindAddress = fmt.Sprintf(":%s", port)
 	}
 
 	env.Parse()
@@ -44,7 +47,7 @@ func main() {
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
 	getRouter.HandleFunc("/", wh.Welcome)
 	// Deprecated handlers
-	getRouter.HandleFunc("/season/{season:[1-9]}/format/{format:quotes|connections}", qh.GetQuotesBySeason)
+	getRouter.HandleFunc("/season/{season:[1-9]}/format/{format:quotes|connections}", qh.GetQuotesBySeasonWithFormat)
 	getRouter.HandleFunc("/season/{season:[1-9]}/episode/{episode:[1-9]|[1][0-9]|2[0-3]}", qh.GetQuotesBySeasonAndEpisode)
 	// V2 handlers to use request body for filtering data
 	getRouter.HandleFunc("/v2/quotes", qh.GetQuotes)
@@ -53,7 +56,7 @@ func main() {
 		Addr:        bindAddress,
 		Handler:     sm,
 		ErrorLog:    l,
-		ReadTimeout: 5 * time.Second,
+		ReadTimeout: 1 * time.Minute,
 		IdleTimeout: 2 * time.Minute,
 	}
 

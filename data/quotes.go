@@ -54,7 +54,7 @@ func (q *QuotesDB) GetQuotes() (Quotes, error) {
 }
 
 // GetQuotesBySeason returns all quotes for the given season from the database
-func (q *QuotesDB) GetQuotesBySeason(season int, format string) (Quotes, error) {
+func (q *QuotesDB) GetQuotesBySeason(season int) (Quotes, error) {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
 		ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s", q.opts.username, q.opts.password, q.opts.hostname)).
