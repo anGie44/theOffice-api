@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/anGie44/theOffice-api/data"
@@ -26,7 +25,7 @@ func (q *Quotes) GetQuotes(rw http.ResponseWriter, r *http.Request) {
 
 // GetQuotesBySeason handles GET requests and returns quotes for the specified season and format
 // GET /season/{season}/format/{format}
-func (q *Quotes) GetQuotesBySeason(rw http.ResponseWriter, r *http.Request) {
+func (q *Quotes) GetQuotesBySeasonWithFormat(rw http.ResponseWriter, r *http.Request) {
 	season, err := getSeason(r)
 	if err != nil {
 		http.Error(rw, "Unable to convert season", http.StatusBadRequest)
@@ -37,23 +36,32 @@ func (q *Quotes) GetQuotesBySeason(rw http.ResponseWriter, r *http.Request) {
 	if format == "" {
 		http.Error(rw, "Must specify a format", http.StatusBadRequest)
 		return
-	} else if format != "quotes" {
-		http.Error(rw, fmt.Sprintf("%s format not implemented", format), http.StatusNotImplemented)
-		return
 	}
 
 	q.l.Printf("Handle GET Quotes for Season (%d) in Format (%s)\n", season, format)
 
-	quotes, err := q.quotesDB.GetQuotesBySeason(season, format)
+	quotes, err := q.quotesDB.GetQuotesBySeason(season)
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
 		data.ToJSON(&GenericError{Message: err.Error()}, rw)
 		return
 	}
 
-	err = data.ToJSON(quotes, rw)
+	if format == "quotes" {
+		err = data.ToJSON(quotes, rw)
+		if err != nil {
+			http.Error(rw, "Unable to marshal quotes json", http.StatusInternalServerError)
+		}
+		return
+	}
+
+	// Connections
+
+	connections := data.GetConnectionsPerEpisode(quotes)
+
+	err = data.ToJSON(connections, rw)
 	if err != nil {
-		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
+		http.Error(rw, "Unable to marshal connections json", http.StatusInternalServerError)
 	}
 }
 

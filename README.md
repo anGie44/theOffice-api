@@ -12,7 +12,7 @@ Currently used for: https://angie44.github.io/theOffice
 
 ## GET 
 
-* Get quotes or nodes/links by season number ⚠️ **Under Maintenance (only `quotes` supported at this time)** ⚠️
+* Get quotes or nodes/links by season number
     * **URL:**           _/season/:season/format/:format_
     * **Method:**       `GET`
     * **URL Params:**
@@ -26,7 +26,7 @@ Currently used for: https://angie44.github.io/theOffice
      * **Success Response:**
        * **Code:** 200
        * **Content [Quotes]:** `[{ "season": seasonNumber, "episode" : episodeNumber, "scene": sceneNumber, "episode_name": episodeName, "character": character, "quote" : quote}]`
-       * **Content [Connections]:** `{ "data" : [{ "episode": episodeNumber, "name": episodeName, "links" : [{ "source" : characterName, "target": characterName, "value" : numberOfCoOccurencesInEpisode }], "nodes" : [{ "id" : characterName }]}`
+       * **Content [Connections]:** `[{ "episode": episodeNumber, "name": episodeName, "links" : [{ "source" : characterName, "target": characterName, "value" : numberOfCoOccurencesInEpisode }], "nodes" : [{ "id" : characterName }]`
         
    
 * Get quotes for a specific season and episode
