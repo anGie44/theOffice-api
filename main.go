@@ -12,6 +12,7 @@ import (
 
 	"github.com/anGie44/theOffice-api/data"
 	"github.com/anGie44/theOffice-api/handlers"
+	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/nicholasjackson/env"
 )
@@ -52,9 +53,12 @@ func main() {
 	// V2 handlers to use request body for filtering data
 	getRouter.HandleFunc("/v2/quotes", qh.GetQuotes)
 
+	// CORS
+	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
+
 	s := http.Server{
 		Addr:        bindAddress,
-		Handler:     sm,
+		Handler:     ch(sm),
 		ErrorLog:    l,
 		ReadTimeout: 1 * time.Minute,
 		IdleTimeout: 2 * time.Minute,

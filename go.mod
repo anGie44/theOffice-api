@@ -3,6 +3,7 @@ module github.com/anGie44/theOffice-api
 go 1.18
 
 require (
+	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/mxschmitt/golang-combinations v1.1.0
 	github.com/nicholasjackson/env v0.6.0
@@ -10,6 +11,7 @@ require (
 )
 
 require (
+	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
