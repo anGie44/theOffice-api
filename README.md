@@ -12,7 +12,7 @@ Currently used for: https://angie44.github.io/theOffice
 
 ## GET 
 
-* Get quotes or nodes/links by season number 
+* Get quotes or nodes/links by season number ⚠️ **Under Maintenance (only `quotes` supported at this time)** ⚠️
     * **URL:**           _/season/:season/format/:format_
     * **Method:**       `GET`
     * **URL Params:**
