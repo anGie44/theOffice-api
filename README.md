@@ -19,16 +19,14 @@ Currently used for: https://angie44.github.io/theOffice
     
          **Required:**
          
-         `season=[integer] // season number [1-9], inclusive`
+         * `season=[integer] // season number [1-9], inclusive`
          
-         `format=[string] // "quotes" or "connections"`
+         * `format=[string] // "quotes" or "connections"`
 
      * **Success Response:**
-      * **Code:** 200 <br />
-      
-        **Content [Quotes]:** [{ "season": _seasonNumber, "episode" : _episodeNumber, "scene": _sceneNumber,_"episode_name": _episodeName, "character": _character,_"quote" : _quote_}]
-        
-        **Content [Connections]:** { "data" : [{ "episode": _episodeNumber_, "name": _episodeName_, "links" : [{ "source" : _characterName_, "target": _characterName_, "value" : _numberOfCoOccurencesInEpisode_ }], "nodes" : [{ "id" : _characterName_ }]}
+       * **Code:** 200
+       * **Content [Quotes]:** `[{ "season": seasonNumber, "episode" : episodeNumber, "scene": sceneNumber, "episode_name": episodeName, "character": character, "quote" : quote}]`
+       * **Content [Connections]:** `{ "data" : [{ "episode": episodeNumber, "name": episodeName, "links" : [{ "source" : characterName, "target": characterName, "value" : numberOfCoOccurencesInEpisode }], "nodes" : [{ "id" : characterName }]}`
         
    
 * Get quotes for a specific season and episode
@@ -38,11 +36,11 @@ Currently used for: https://angie44.github.io/theOffice
     
          **Required:** 
          
-         `season=[integer] // season number [1-9], inclusive`
+         * `season=[integer] // season number [1-9], inclusive`
          
-         `episode=[integer] // episode number within season (indexing begins at 1)`
+         * `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
-     * **Code:** 200 <br />
-       **Content:** [{ "season": _seasonNumber,_"episode" : _episodeNumber, "scene": _sceneNumber,_"episode_name": _episodeName, "character": _character,_"quote" : _quote_}]
+      * **Code:** 200
+      * **Content:** `[{ "season": seasonNumber, "episode" : episodeNumber, "scene": sceneNumber, "episode_name": episodeName, "character": character, "quote" : quote }]`
     
                 
