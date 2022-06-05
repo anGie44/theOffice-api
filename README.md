@@ -26,7 +26,7 @@ Currently used for: https://angie44.github.io/theOffice
      * **Success Response:**
       * **Code:** 200 <br />
       
-        **Content [Quotes]:** { "data" : { "episode": _episodeNumber_, "name" : _episodeName_, "quotes" : [[]] }
+        **Content [Quotes]:** [{ "season": _seasonNumber, "episode" : _episodeNumber, "scene": _sceneNumber,_"episode_name": _episodeName, "character": _character,_"quote" : _quote_}]
         
         **Content [Connections]:** { "data" : [{ "episode": _episodeNumber_, "name": _episodeName_, "links" : [{ "source" : _characterName_, "target": _characterName_, "value" : _numberOfCoOccurencesInEpisode_ }], "nodes" : [{ "id" : _characterName_ }]}
         
@@ -43,6 +43,6 @@ Currently used for: https://angie44.github.io/theOffice
          `episode=[integer] // episode number within season (indexing begins at 1)`
     * **Success Response:**
      * **Code:** 200 <br />
-       **Content:** { "data" : { "episode" : _episodeNumber_, "name": _episodeName_, "quotes" : [[]] }
+       **Content:** [{ "season": _seasonNumber,_"episode" : _episodeNumber, "scene": _sceneNumber,_"episode_name": _episodeName, "character": _character,_"quote" : _quote_}]
     
                 
