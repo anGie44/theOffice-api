@@ -1,9 +1,7 @@
 # theOffice-api
 a REST api to retrieve the Office quotes when needed (ALWAYS 💁‍)
 
-Currently hosted at: https://the-office-api.herokuapp.com 
-
-:warning: **JK it's been a minute and the heroku app is 💀...:cry::rofl:** :warning:
+Currently hosted at: https://theofficeapi-angelinepinilla.b4a.run
 
 Currently used for: https://angie44.github.io/theOffice
 
