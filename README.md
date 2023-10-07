@@ -1,7 +1,7 @@
 # theOffice-api
 a REST api to retrieve the Office quotes when needed (ALWAYS 💁‍)
 
-Currently hosted at: https://theofficeapi-angelinepinilla.b4a.run
+Currently hosted at: https://the-office.fly.dev
 
 Currently used for: https://angie44.github.io/theOffice
 
