@@ -1,0 +1,117 @@
+definitions:
+    Connection:
+        properties:
+            episode:
+                format: int64
+                type: integer
+                x-go-name: Episode
+            episode_name:
+                type: string
+                x-go-name: EpisodeName
+            links:
+                items:
+                    $ref: '#/definitions/Link'
+                type: array
+                x-go-name: Links
+            nodes:
+                items:
+                    $ref: '#/definitions/Node'
+                type: array
+                x-go-name: Nodes
+        type: object
+        x-go-package: github.com/anGie44/theOffice-api/models
+    Link:
+        properties:
+            source:
+                type: string
+                x-go-name: Source
+            target:
+                type: string
+                x-go-name: Target
+            value:
+                format: int64
+                type: integer
+                x-go-name: Value
+        type: object
+        x-go-package: github.com/anGie44/theOffice-api/models
+    Node:
+        properties:
+            id:
+                type: string
+                x-go-name: Id
+        type: object
+        x-go-package: github.com/anGie44/theOffice-api/models
+    Quote:
+        description: Quote defines the structure for an API quote
+        properties:
+            character:
+                description: the character the quote is associated with
+                type: string
+                x-go-name: Character
+            episode:
+                description: the episode the quote is from
+                format: int64
+                type: integer
+                x-go-name: Episode
+            episode_name:
+                description: the episode name the quote is from
+                type: string
+                x-go-name: EpisodeName
+            quote:
+                description: the quote
+                type: string
+                x-go-name: Quote
+            scene:
+                description: the scene the quote is from
+                format: int64
+                type: integer
+                x-go-name: Scene
+            season:
+                description: the season the quote is from
+                format: int64
+                type: integer
+                x-go-name: Season
+        type: object
+        x-go-package: github.com/anGie44/theOffice-api/models
+paths:
+    /quotes:
+        get:
+            description: Return a list of quotes from the database
+            operationId: getQuotes
+            responses:
+                "200":
+                    $ref: '#/responses/quotesResponse'
+            tags:
+                - quotes
+    /season/{season}/episode/{episode}:
+        get:
+            description: Return a list of quotes from the database for a given season and episode
+            operationId: getQuotesBySeasonAndEpisode
+            responses:
+                "200":
+                    $ref: '#/responses/quotesResponse'
+            tags:
+                - quotes
+    /season/{season}/format/{format}:
+        get:
+            description: Return a list of quotes from the database for a given season and format
+            operationId: getQuotesBySeasonWithFormat
+            responses:
+                "200":
+                    $ref: '#/responses/formattedQuotesResponse'
+            tags:
+                - interface
+responses:
+    formattedQuotesResponse:
+        description: A list of quotes or connections
+        headers:
+            Body: {}
+        schema: {}
+    quotesResponse:
+        description: A list of quotes
+        headers:
+            Body:
+                items:
+                    $ref: '#/definitions/Quote'
+                type: array
+swagger: "2.0"
