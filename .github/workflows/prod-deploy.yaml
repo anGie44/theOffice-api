@@ -11,6 +11,17 @@ on:
       - fly.staging.toml
 
 jobs:
+  build:
+    name: Build App
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --build-only --remote-only -c fly.toml
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          
   deploy:
     name: Deploy App
     runs-on: ubuntu-latest
