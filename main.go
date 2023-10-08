@@ -57,7 +57,7 @@ func main() {
 	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
 
 	s := http.Server{
-		Addr:        fmt.Sprintf(":%s", cfg.Port),
+		Addr:        fmt.Sprintf(":%d", cfg.Port),
 		Handler:     ch(sm),
 		ErrorLog:    l,
 		ReadTimeout: 1 * time.Minute,
@@ -65,7 +65,7 @@ func main() {
 	}
 
 	go func() {
-		l.Printf("Starting server on port %s\n", cfg.Port)
+		l.Printf("Starting server on port %d\n", cfg.Port)
 
 		err := s.ListenAndServe()
 		if err != nil {
