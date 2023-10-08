@@ -9,6 +9,8 @@ on:
       - .github/workflows/prod-deploy.yaml
       - fly.toml
 
+concurrency:
+  group: ${{ github.workflow }}
 
 jobs:
   build:
@@ -21,7 +23,7 @@ jobs:
       - run: flyctl deploy --build-only --remote-only -c fly.staging.toml
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          
+
   deploy:
     needs: build
     name: Deploy App

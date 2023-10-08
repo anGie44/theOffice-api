@@ -10,6 +10,9 @@ on:
       - .github/workflows/staging-deploy.yaml
       - fly.staging.toml
 
+concurrency:
+  group: ${{ github.workflow }}
+
 jobs:
   build:
     name: Build App
