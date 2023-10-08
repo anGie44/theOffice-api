@@ -7,37 +7,37 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"strings"
 	"time"
 
 	"github.com/anGie44/theOffice-api/data"
 	"github.com/anGie44/theOffice-api/handlers"
+
+	"github.com/caarlos0/env/v9"
+
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/nicholasjackson/env"
 )
 
-var dbHost = env.String("MONGODB_HOST", false, "localhost", "mongodb host address")
-var dbName = env.String("MONGODB_DATABASE", false, "the-office", "mongodb database name")
-var dbUsername = env.String("MONGODB_USERNAME", false, "boss", "mongodb database username")
-var dbPassword = env.String("MONGODB_PASSWORD", false, "password", "mongodb database user password")
-var dbCollection = env.String("MONGODB_COLLECTION", false, "quotes", "mongodb database collection")
+type config struct {
+	Port         int    `env:"PORT" envDefault:"8080"`
+	DBHost       string `env:"MONGODB_HOST" envDefault:"localhost"`
+	DBDatabase   string `env:"MONGODB_DATABASE" envDefault:"the-office"`
+	DBCollection string `env:"MONGODB_COLLECTION" envDefault:"quotes"`
+	DBUsername   string `env:"MONGODB_USERNAME" envDefault:"boss"`
+	DBPassword   string `env:"MONGODB_PASSWORD" envDefault:"password"`
+}
 
 func main() {
-	var bindAddress string
-	port := os.Getenv("PORT") // value provided by Heroku
-	if port == "" {
-		bindAddress = ":8080"
-	} else {
-		bindAddress = fmt.Sprintf(":%s", port)
-	}
-
-	env.Parse()
-
 	l := log.New(os.Stdout, "theOffice-api ", log.LstdFlags)
 
+	cfg := config{}
+	if err := env.Parse(&cfg); err != nil {
+		l.Printf("Error parsing environment config: %s\n", err)
+		os.Exit(1)
+	}
+
 	// Create MongoDB Client
-	dbOpts := data.NewQuotesDBOptions(*dbHost, *dbName, *dbUsername, *dbPassword, *dbCollection)
+	dbOpts := data.NewQuotesDBOptions(cfg.DBHost, cfg.DBDatabase, cfg.DBUsername, cfg.DBPassword, cfg.DBCollection)
 	db := data.NewQuotesDB(dbOpts, l)
 
 	wh := handlers.NewWelcome(l)
@@ -57,7 +57,7 @@ func main() {
 	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))
 
 	s := http.Server{
-		Addr:        bindAddress,
+		Addr:        fmt.Sprintf(":%d", cfg.Port),
 		Handler:     ch(sm),
 		ErrorLog:    l,
 		ReadTimeout: 1 * time.Minute,
@@ -65,7 +65,7 @@ func main() {
 	}
 
 	go func() {
-		l.Printf("Starting server on port %s\n", strings.TrimPrefix(bindAddress, ":"))
+		l.Printf("Starting server on port %d\n", cfg.Port)
 
 		err := s.ListenAndServe()
 		if err != nil {
