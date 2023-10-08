@@ -1,4 +1,4 @@
-package data
+package models
 
 import (
 	"context"
@@ -13,14 +13,29 @@ import (
 
 var ErrQuotesNotFound = fmt.Errorf("Quotes not found")
 
+// Quote defines the structure for an API quote
+// swagger:model
 type Quote struct {
-	Id          int    `bson:"-" json:"-"`
-	Season      int    `bson:"season" json:"season"`
-	Episode     int    `bson:"episode" json:"episode"`
-	Scene       int    `bson:"scene" json:"scene"`
+	// the id for the quote
+	Id int `bson:"-" json:"-"`
+
+	// the season the quote is from
+	Season int `bson:"season" json:"season"`
+
+	// the episode the quote is from
+	Episode int `bson:"episode" json:"episode"`
+
+	// the scene the quote is from
+	Scene int `bson:"scene" json:"scene"`
+
+	// the episode name the quote is from
 	EpisodeName string `bson:"episode_name" json:"episode_name"`
-	Character   string `bson:"character" json:"character"`
-	Quote       string `bson:"quote" json:"quote"`
+
+	// the character the quote is associated with
+	Character string `bson:"character" json:"character"`
+
+	// the quote
+	Quote string `bson:"quote" json:"quote"`
 }
 
 type Quotes []*Quote

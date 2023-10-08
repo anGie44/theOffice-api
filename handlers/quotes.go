@@ -5,16 +5,17 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/anGie44/theOffice-api/data"
+	"github.com/anGie44/theOffice-api/models"
+
 	"github.com/gorilla/mux"
 )
 
 type Quotes struct {
 	l        *log.Logger
-	quotesDB *data.QuotesDB
+	quotesDB *models.QuotesDB
 }
 
-func NewQuotes(l *log.Logger, qdb *data.QuotesDB) *Quotes {
+func NewQuotes(l *log.Logger, qdb *models.QuotesDB) *Quotes {
 	return &Quotes{l, qdb}
 }
 

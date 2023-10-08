@@ -9,13 +9,15 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/anGie44/theOffice-api/data"
 	"github.com/anGie44/theOffice-api/handlers"
+	"github.com/anGie44/theOffice-api/models"
 
 	"github.com/caarlos0/env/v9"
 
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+
+	"github.com/go-openapi/runtime/middleware"
 )
 
 type config struct {
@@ -37,8 +39,8 @@ func main() {
 	}
 
 	// Create MongoDB Client
-	dbOpts := data.NewQuotesDBOptions(cfg.DBHost, cfg.DBDatabase, cfg.DBUsername, cfg.DBPassword, cfg.DBCollection)
-	db := data.NewQuotesDB(dbOpts, l)
+	dbOpts := models.NewQuotesDBOptions(cfg.DBHost, cfg.DBDatabase, cfg.DBUsername, cfg.DBPassword, cfg.DBCollection)
+	db := models.NewQuotesDB(dbOpts, l)
 
 	wh := handlers.NewWelcome(l)
 	qh := handlers.NewQuotes(l, db)
@@ -52,6 +54,13 @@ func main() {
 	getRouter.HandleFunc("/season/{season:[1-9]}/episode/{episode:[1-9]|[1][0-9]|2[0-3]}", qh.GetQuotesBySeasonAndEpisode)
 	// V2 handlers to use request body for filtering data
 	getRouter.HandleFunc("/v2/quotes", qh.GetQuotes)
+
+	// handler for documentation
+	opts := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
+	sh := middleware.Redoc(opts, nil)
+
+	getRouter.Handle("/docs", sh)
+	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./docs")))
 
 	// CORS
 	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))

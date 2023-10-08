@@ -1,9 +1,10 @@
-package data
+package models
 
 import (
 	combinations "github.com/mxschmitt/golang-combinations"
 )
 
+// swagger:model
 type Connection struct {
 	Episode     int     `bson:"episode" json:"episode"`
 	EpisodeName string  `bson:"episode_name" json:"episode_name"`
@@ -11,12 +12,14 @@ type Connection struct {
 	Nodes       []*Node `bson:"nodes" json:"nodes"`
 }
 
+// swagger:model
 type Link struct {
 	Source string `bson:"source" json:"source"`
 	Target string `bson:"target" json:"target"`
 	Value  int    `bson:"value" json:"value"`
 }
 
+// swagger:model
 type Node struct {
 	Id string `bson:"id" json:"id"`
 }
