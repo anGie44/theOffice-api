@@ -8,6 +8,7 @@ on:
       - 'json_examples/**'
       - 'models/**'
       - .github/workflows/staging-deploy.yaml
+      - fly.staging.toml
 
 
   jobs:
