@@ -1,23 +1,24 @@
-name: Staging Deploy
+name: Prod Deploy
 
 on: 
-  pull_request:
+  push:
+    branches: [main]
     paths-ignore:
       - README.md
       - 'json_examples/**'
       - 'models/**'
-      - .github/workflows/prod-deploy.yaml
+      - .github/workflows/staging-deploy.yaml
 
 
-jobs:
+  jobs:
   deploy:
     name: Deploy App
     runs-on: ubuntu-latest
-    environment: staging
+    environment: production
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only -c fly.staging.toml
+      - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
