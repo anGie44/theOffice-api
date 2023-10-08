@@ -10,8 +10,7 @@ on:
       - .github/workflows/staging-deploy.yaml
       - fly.staging.toml
 
-
-  jobs:
+jobs:
   deploy:
     name: Deploy App
     runs-on: ubuntu-latest
