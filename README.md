@@ -10,6 +10,8 @@ Currently used for: https://angie44.github.io/theOffice
 
 # API Reference
 
+Available at: https://the-office.fly.dev/docs
+
 ## GET 
 
 * Get quotes or nodes/links by season number
