@@ -96,10 +96,12 @@ func (q *Quotes) GetQuotesBySeasonAndEpisode(rw http.ResponseWriter, r *http.Req
 		return
 	}
 
+	character := r.URL.Query().Get("character")
+
 	q.l.Printf("Handle GET Quotes for Season (%d) Episode (%d)\n", season, episode)
 	rw.Header().Add("Content-Type", "application/json")
 
-	quotes, err := q.quotesDB.GetQuotesBySeasonAndEpisode(season, episode)
+	quotes, err := q.quotesDB.GetQuotesBySeasonAndEpisode(season, episode, character)
 	if err != nil {
 		rw.WriteHeader(http.StatusInternalServerError)
 		helpers.ToJSON(&GenericError{Message: err.Error()}, rw)
