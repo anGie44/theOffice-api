@@ -113,7 +113,7 @@ func (q *QuotesDB) GetQuotesBySeason(season int) (Quotes, error) {
 }
 
 // GetQuotesBySeasonAndEpisode returns all quotes for the given season and episode from the database
-func (q *QuotesDB) GetQuotesBySeasonAndEpisode(season, episode int) (Quotes, error) {
+func (q *QuotesDB) GetQuotesBySeasonAndEpisode(season, episode int, character string) (Quotes, error) {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
 	clientOptions := options.Client().
 		ApplyURI(fmt.Sprintf("mongodb+srv://%s:%s@%s", q.opts.username, q.opts.password, q.opts.hostname)).
@@ -134,7 +134,12 @@ func (q *QuotesDB) GetQuotesBySeasonAndEpisode(season, episode int) (Quotes, err
 	db := client.Database(q.opts.database)
 	collection := db.Collection(q.opts.collection)
 
-	filterCursor, err := collection.Find(q.ctx, bson.M{"season": season, "episode": episode})
+	filter := bson.M{"season": season, "episode": episode}
+	if character != "" {
+		filter["character"] = character
+	}
+
+	filterCursor, err := collection.Find(q.ctx, filter)
 	if err != nil {
 		q.l.Printf("error while searching for quotes in db: %s", err)
 		return nil, err
